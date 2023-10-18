@@ -1,0 +1,9 @@
+package com.e1;
+
+import org.testng.annotations.Test;
+
+public class jsonValidation {
+  @Test
+  public void f() {
+  }
+}

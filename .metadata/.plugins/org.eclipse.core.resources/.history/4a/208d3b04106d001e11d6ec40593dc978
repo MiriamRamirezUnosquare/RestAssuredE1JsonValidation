@@ -1,0 +1,61 @@
+package com.e1;
+
+import org.testng.Assert;
+import org.testng.Reporter;
+import org.testng.annotations.Test;
+import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
+import static io.restassured.RestAssured.*;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import static org.hamcrest.Matchers.*;
+
+public class jsonValidation {
+  @Test
+  public void jsonValidation1stA() {
+	  
+	  // Approach: declaring the http objects 	  
+	  RestAssured.baseURI = "https://reqres.in/api/";
+	  RequestSpecification httpRequest = RestAssured.given();
+	  Response response = httpRequest.get("/users/2");
+		
+	  int statusCode = response.getStatusCode();
+
+	  // Assert that correct status code is returned.	  
+	  Assert.assertEquals(statusCode,200);
+	  Reporter.log("Sucess 200 validation");
+	
+	  // Assert all the items 	  
+	  response.then().body("data.email", equalTo("janet.weaver@reqres.in"));
+	  response.then().body("data.first_name", equalTo("Janet"));
+	  response.then().body("data.last_name", equalTo("Weaver"));
+	  response.then().body("data.avatar", equalTo("https://reqres.in/img/faces/2-image.jpg"));
+	  response.then().body("support.url", equalTo("https://reqres.in/#support-heading"));
+	  response.then().body("support.text", equalTo("To keep ReqRes free, contributions towards server costs are appreciated!"));
+	  Reporter.log(response.body().asString());
+	  
+  }
+  
+  @Test
+  public void jsonValidation1stB() {
+	  // Approach: using Given().When().Then()	
+	  
+	  String response = given()
+	  .when()
+	  .get("https://reqres.in/api/users/2")
+	  	.then()
+	  	.assertThat().log().all().statusCode(200)
+	  	.assertThat().contentType(ContentType.JSON)
+	  	.assertThat().log().all().body("data.first_name", equalTo("Janet"))
+	  	.assertThat().log().all().body("data.last_name", equalTo("Weaver"))
+	  	.assertThat().log().all().body("data.avatar", equalTo("https://reqres.in/img/faces/2-image.jpg"))
+	  	.assertThat().log().all().body("support.url", equalTo("https://reqres.in/#support-heading"))
+	  	.assertThat().log().all().body("support.text", equalTo("To keep ReqRes free, contributions towards server costs are appreciated!"))
+	  	.extract().response().asString();
+	  
+	  Reporter.log("Sucess 200 validation");
+	  Reporter.log(response);	  
+	  
+  }
+  
+}

@@ -1,0 +1,22 @@
+INDEX VERSION 1.132+C:\Users\miriam.ramirez\Documents\Training\CoE exercises\RestAssuredE1JsonValidation\.metadata\.plugins\org.eclipse.jdt.core
+768479724.index
+2006923192.index
+2129677873.index
+3413725848.index
+3945148341.index
+151646753.index
+868254573.index
+1865797976.index
+546571166.index
+2984115278.index
+223551359.index
+2809427270.index
+1361796897.index
+2349119188.index
+1977290893.index
+1632582849.index
+3926480591.index
+3085317344.index
+3422412612.index
+3533985602.index
+4012397300.index
